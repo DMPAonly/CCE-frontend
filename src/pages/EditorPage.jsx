@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import ACTIONS from '../Actions';
-import Client from '../components/Client';
-import Editor from '../components/Editor';
+import Client from '../Components/Client';
+import Editor from '../Components/Editor';
 import VoiceChat from '../Components/VoiceChat';
 import { initSocket } from '../socket';
 import {
@@ -12,7 +12,7 @@ import {
     useParams,
 } from 'react-router-dom';
 import STARTER_TEMPLATES from '../StartTemplate';
-import ChatPanel from '../components/Chat/ChatPanel';
+import ChatPanel from '../Components/Chat/ChatPanel';
 import { api2 } from '../api/authApi';
 import { useAuth } from "../context/AuthContext";
 
