@@ -8,7 +8,7 @@ import Dashboard from "./Components/Dashboard.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Workspace from "./Components/shared/Workspace.jsx";
 import FileViewer from "./Components/shared/FileViewer.jsx";
-import EditorPage from "./Pages/EditorPage.jsx";
+import EditorPage from "./pages/EditorPage.jsx";
 import { Toaster } from "react-hot-toast";
 
 export default function App() {
