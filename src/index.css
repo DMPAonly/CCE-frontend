@@ -1,0 +1,807 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0f0c29;
+  color: #f1f5f9;
+}
+
+#root {
+  /* Remove the old width/border constraint so auth pages fill the viewport */
+  width: 100%;
+  min-height: 100svh;
+}
+
+/* ─── Input focus ring (global, used by all auth forms) ─────────────────── */
+input:focus {
+  border-color: #818cf8 !important;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+
+/* ─── Smooth transitions on interactive elements ────────────────────────── */
+button,
+a,
+input {
+  transition: opacity 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ─── Typography defaults ───────────────────────────────────────────────── */
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* ─── Code / mono font ──────────────────────────────────────────────────── */
+code,
+pre {
+  font-family: ui-monospace, Consolas, 'Courier New', monospace;
+}
+
+/*Added Later on*/
+.homePageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    height: 100vh;
+}
+
+.formWrapper {
+    background: #282a36;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+footer a {
+    color: #4aee88;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainLabel {
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.homePageLogo {
+    height: 80px;
+    margin-bottom: 30px;
+}
+
+.inputBox {
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-bottom: 14px;
+    background: #eee;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn {
+    border:none;
+    border-radius:8px;
+    padding:12px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Example CSS improvement for modern buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 16px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.runBtn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    width: 90%;
+}
+
+.saveBtn {
+    background: #10b981;
+    color: #fff;
+    width: 90%;
+}
+
+.copyBtn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    width: 90%;
+}
+
+.leaveBtn {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.leaveBtn:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* .joinBtn,
+.leaveBtn {
+    background: #4aed88;
+    width: 100px;
+    margin-left: auto;
+}
+
+.joinBtn:hover,
+.leaveBtn:hover {
+    background: #2b824c;
+} */
+
+.createInfo {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.createNewBtn {
+    color: #4aed88;
+    text-decoration: none;
+    border-bottom: 1px solid #4aed88;
+    transition: all 0.3s ease-in-out;
+}
+
+.createNewBtn:hover,
+footer a:hover {
+    color: #368654;
+    border-color: #368654;
+}
+
+.mainWrap {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.aside {
+    /*  */
+    width: 260px;
+    min-width: 260px;
+    background: #12131e;
+    border-right: 1px solid #303446;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    height: 100vh;
+    align-items: center;
+}
+.asideInner {
+    /* left side bar */
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    flex:1;
+    overflow-y: auto;
+}
+.aside.collapsed{
+    width: 0;
+    min-width: 0;
+    border-right: none;
+}
+.aside.open{
+    width: 240px;
+}
+
+.asideInner h3{
+    color:#fff;
+}
+
+.aside.collapsed .asideInner,
+.aside.collapsed .btn {
+    display: none;
+}
+
+.menuBtn{
+    position:absolute;
+    top:15px;
+    left:15px;
+    z-index:1000;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:#fff;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    transition:.25s;
+}
+
+.menuBtn:hover{
+    background:#1d4ed8;
+}
+
+.menuBtn{
+    left:15px;
+    transition:left .3s ease;
+}
+
+.aside.open + .workspace .menuBtn{
+    left:255px;
+}
+
+.clientsList {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.client {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+}
+.userName {
+    margin-top: 10px;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:500;
+}
+
+.logo {
+    border-bottom: 1px solid #424242;
+    padding-bottom: 10px;
+}
+
+.logoImage {
+    height: 60px;
+}
+
+/* .leaveBtn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.copyBtn{
+    width: 100%;
+    margin-top: 20px;
+} */
+
+.leaveBtn,
+.copyBtn,
+.runBtn, 
+.saveBtn {
+    /* width:100%; */
+    margin-top:10px;
+}
+
+.CodeMirror {
+    height: 100% !important;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.6;
+    padding-top: 10px;
+}
+
+/* Editor Container */
+.editorWrap {
+    flex: 1; /* Takes remaining center space */
+    min-width: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* position: relative;
+    height: 100%;
+    overflow: hidden; */
+}
+
+.outputScreen {
+    /* flex:0 0 340px;
+    min-width:280px;
+    max-width:420px;/* added above lines for output screen */
+    /* background: #121319; */
+    /* position: relative; CRITICAL: Enables bottom-right positioning for chat */
+    /* height: 100%; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* width: 380px;
+    min-width: 320px;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column; */
+    position: relative;
+    width: 360px;
+    min-width:250px;
+    max-width:700px;
+    background:#0f1117;
+    border-left:1px solid #303446;
+    display:flex;
+    flex-direction:column;
+
+}
+
+.outputScreen pre {
+    margin: 0;
+    padding: 15px;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    color: #ffffff;              /* White text */
+    background: #0f1117;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.languageSelectGroup {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.languageSelectGroup label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #8be9fd;
+}
+
+.languageSelect {
+    height: 42px;
+    padding: 8px 12px;
+    background: #282a36;
+    color: #f8f8f2;
+    border: 1px solid #44475a;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.languageSelect:hover,
+.languageSelect:focus {
+    border-color: #bd93f9;
+    background: #323645;
+}
+
+/*Chat*/
+.chat-container {
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #444;
+    padding: 10px;
+}
+
+.message-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 2px 0;
+}
+
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message strong {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.message p {
+    margin: 0;
+    color: #ffffff;
+}
+
+.my-message {
+    align-self: flex-end;
+    text-align: right;
+    background-color: #2f6fed;
+    color: white;
+}
+
+.other-message {
+    align-self: flex-start;
+    text-align: left;
+    background-color: #2a2a2a;
+}
+
+.message p {
+    margin: 4px 0 0;
+}
+
+.chat-container h2 {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.chat-input {
+    border-top: 1px solid #444;
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+.chat-input button {
+    padding: 8px 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/*chat Overlay*/
+/* Container for the floating widget in the bottom-right corner */
+/* Container for floating widget */
+.floatingChatContainer {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 330px;
+    background-color: #1c1e29;
+    border: 1px solid #333742;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    overflow: hidden;
+    transition: height 0.2s ease-in-out;
+    backdrop-filter: blur(15px);
+    background: rgba(28, 30, 41, 0.95);
+}
+
+.floatingChatContainer.expanded .chatBody {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header bar that serves as the click toggle */
+.chatHeader {
+    background-color: #282a36;
+    color: #fff;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: #20232f;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
+.chatTitle {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.toggleBtn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* Expandable Chat Body */
+.chatBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Ensure outputScreen parent container has relative positioning */
+.outputScreen {
+    background: #0f1117;
+    border-left: 1px solid #303446;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* ... your existing output screen styles ... */
+}
+
+/*a little proper*/
+/* --- Main Panel Container --- */
+/* Internal Chat Component Reset */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    background-color: #1a1c23;
+}
+
+/* --- Message List Container --- */
+.message-list {
+    flex: 1; /* Takes up all available space */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px; /* Space for scrollbar */
+    margin-bottom: 10px;
+}
+
+/* Individual Message Wrapper */
+.message-item {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%; /* Keeps bubbles compact */
+    word-break: break-word; /* Prevents overflow on long text */
+}
+
+.message-item.sent {
+    align-self: flex-end; /* Align user messages to the right */
+}
+
+.message-item.received {
+    align-self: flex-start; /* Align incoming messages to the left */
+}
+
+/* Chat Bubble Styling */
+.message-bubble {
+     padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #ffffff;      
+}
+
+.message-bubble span {
+    color: #ffffff;
+}
+
+.message-item.sent .message-bubble {
+     background: #2563eb;
+    color: #ffffff;
+    border-bottom-right-radius: 2px;
+}
+
+.message-item.received .message-bubble {
+    background: #2d3748;
+    color: #ffffff;
+    border-bottom-left-radius: 2px;
+}
+
+.message-user {
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;        /* White */
+    margin-bottom: 4px;
+    padding: 0 4px;
+}
+
+/* --- Input Area --- */
+.chat-input {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background-color: #222531;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #333742;
+}
+
+.chat-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 13px;
+    padding: 4px 6px;
+}
+
+.chat-input button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chat-input button:hover {
+    background-color: #1d4ed8;
+}
+
+.floatingChatContainer.expanded {
+    height: 400px;
+}
+
+/* When minimized, force height to fit just the header bar */
+.floatingChatContainer.minimized {
+    height: auto; /* Shrinks cleanly to match header bar height */
+}
+
+.floatingChatContainer.minimized .chatBody {
+    display: none; /* Hides content without unmounting the React component */
+}
+
+/* for scrollbar */
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#4b5563;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#6b7280;
+}
+
+/* logo */
+
+.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    border-bottom:1px solid #303446;
+}
+
+.message-bubble,
+.message-bubble *,
+.message-user {
+    color: #ffffff !important;
+}
+
+.editorWrap{
+    flex:1;
+    min-width:0;
+    height:100vh;
+    overflow:hidden;
+}
+
+.editorContainer{
+    height:100%;
+}
+
+.editorContainer .CodeMirror{
+    height:100% !important;
+}
+
+.resizeHandle{
+    position:absolute;
+    left:0;
+    top:0;
+    width:6px;
+    height:100%;
+    cursor:col-resize;
+    background:transparent;
+    z-index:100;
+}
+
+.resizeHandle:hover{
+    background:#2563eb;
+}
+
+/* Glowing ring animation when speaking */
+.client.speaking .avatarWrapper {
+    box-shadow: 0 0 0 3px #22c55e;
+    border-radius: 14px;
+    animation: pulse-ring 1.2s infinite ease-in-out;
+}
+
+.avatarWrapper {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.micBadge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    font-size: 12px;
+    background: #15803d;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0px rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0px rgba(34, 197, 94, 0);
+    }
+}
+
+.clientCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.outputHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: #181825;
+    border-bottom: 1px solid #2e2e3e;
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 600;
+}
