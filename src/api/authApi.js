@@ -7,7 +7,7 @@ import axios from "axios";
  */
 const BASE_URL = `${import.meta.env.VITE_API_AUTH_URL ?? "https://authentication-service-937514972080.europe-west1.run.app"}/api/v1/auth`;
 
-const BASE_URL_W = `${import.meta.env.VITE_API_WORK_URL ?? "http://localhost:5000/api/files/workspace"}`;
+const BASE_URL_W = `${import.meta.env.VITE_API_WORK_URL ?? "https://workspace-service-937514972080.asia-south2.run.app/api/files/workspace"}`;
 
 export const api = axios.create({
   baseURL: BASE_URL,
